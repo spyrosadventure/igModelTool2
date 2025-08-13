@@ -1,0 +1,8 @@
+namespace igLibrary.Gen.MetaEnum;
+
+public enum igGraphicsMaterialAnimationTimeSource
+{
+	kGraphicsMaterialAnimationTimeSourceTransformed,
+	kGraphicsMaterialAnimationTimeSourceGlobal,
+	kGraphicsMaterialAnimationTimeSourceRandom
+}
