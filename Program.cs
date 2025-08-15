@@ -268,17 +268,15 @@ internal static class Program
             {
                 if (element._type == (byte)IG_VERTEX_TYPE.IG_VERTEX_TYPE_UNUSED) break;
 
-                writer.WriteUInt32(0);
-                writer.WriteUInt32(0);
-                writer.WriteUInt32(offset);
-                writer.WriteUInt16(0);
-                writer.WriteUInt16(GetElementFormat(element._type));
-                writer.WriteUInt32(0);
-                writer.WriteUInt32(0);
-                writer.WriteUInt16(1); // unk0. 32 on wallop
-                writer.WriteUInt16(GetElementFormat2(element._type));
-                writer.WriteUInt16(0);
-                writer.WriteUInt16(3); // usageIndex
+                writer.WriteUInt32(0); // location
+                writer.WriteUInt32(0); // buffer
+                writer.WriteUInt32(offset); // offset
+                writer.WriteUInt32((uint)GetElementFormat(element._type)); // format
+                writer.WriteUInt32(0); // index type ?
+                writer.WriteUInt32(0); // aluDivisor ?
+                writer.WriteUInt16(1);
+                writer.WriteUInt16(GetElementFormat2(element._type)); // mask
+                writer.WriteUInt32((uint)GX2EndianSwapMode.GX2_ENDIAN_SWAP_DEFAULT); // endianSwap (GX2_ENDIAN_SWAP_DEFAULT)
 
                 offset += GetVertexTypeSize(element._type);
             }
@@ -359,7 +357,7 @@ internal static class Program
         return elementType switch
         {
             (byte)IG_VERTEX_TYPE.IG_VERTEX_TYPE_FLOAT3 => 0x0811,
-            (byte)IG_VERTEX_TYPE.IG_VERTEX_TYPE_FLOAT4 => 0x0811,
+            (byte)IG_VERTEX_TYPE.IG_VERTEX_TYPE_FLOAT4 => 0x0813,
             (byte)IG_VERTEX_TYPE.IG_VERTEX_TYPE_SHORT4N => 0x020E,
             (byte)IG_VERTEX_TYPE.IG_VERTEX_TYPE_DEC3N => 0x020B,
             (byte)IG_VERTEX_TYPE.IG_VERTEX_TYPE_HALF2 => 0x0808, // GX2_ATTRIB_TYPE_16_16_FLOAT GX2_ATTRIB_TYPE_16_16_FLOAT
